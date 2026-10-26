@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" width="1000" height="380">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070d"/>
+      <stop offset="1" stop-color="#0b1224"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e0262b"/>
+      <stop offset="0.55" stop-color="#a3121a"/>
+      <stop offset="1" stop-color="#5c070c"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe27a"/>
+      <stop offset="0.5" stop-color="#e8b341"/>
+      <stop offset="1" stop-color="#a8741c"/>
+    </linearGradient>
+    <radialGradient id="reactor">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#bff6ff"/>
+      <stop offset="1" stop-color="#16c2ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#16c2ff" stroke-opacity="0.07"/>
+    </pattern>
+    <style>
+      .hud   { fill: none; stroke: #16c2ff; }
+      .spin  { transform-origin: 210px 190px; animation: spin 18s linear infinite; }
+      .spinr { transform-origin: 210px 190px; animation: spin 26s linear infinite reverse; }
+      .eyes  { animation: flicker 4s infinite; }
+      .scan  { animation: scan 3.5s ease-in-out infinite; }
+      .fade1 { opacity: 0; animation: in .8s ease-out .3s forwards; }
+      .fade2 { opacity: 0; animation: in .8s ease-out .9s forwards; }
+      .fade3 { opacity: 0; animation: in .8s ease-out 1.5s forwards; }
+      .fade4 { opacity: 0; animation: in .8s ease-out 2.1s forwards; }
+      .blink { animation: blink 1s steps(1) infinite; }
+      .pulse { transform-origin: 910px 80px; animation: pulse 2.4s ease-in-out infinite; }
+      text   { font-family: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
+      @keyframes spin    { to { transform: rotate(360deg); } }
+      @keyframes flicker { 0%,100% { opacity: 1 } 46% { opacity: 1 } 48% { opacity: .25 } 50% { opacity: 1 } 52% { opacity: .5 } 54% { opacity: 1 } }
+      @keyframes scan    { 0%,100% { transform: translateY(-110px); opacity: 0 } 10%,90% { opacity: .55 } 50% { transform: translateY(120px) } }
+      @keyframes in      { from { opacity: 0; transform: translateX(-12px) } to { opacity: 1; transform: none } }
+      @keyframes blink   { 50% { opacity: 0 } }
+      @keyframes pulse   { 0%,100% { transform: scale(1); opacity: .9 } 50% { transform: scale(1.12); opacity: 1 } }
+    </style>
+  </defs>
+
+  <rect width="1000" height="380" rx="18" fill="url(#bg)"/>
+  <rect width="1000" height="380" rx="18" fill="url(#grid)"/>
+
+  <!-- HUD rings -->
+  <g class="hud">
+    <circle cx="210" cy="190" r="168" stroke-opacity="0.15"/>
+    <circle class="spin"  cx="210" cy="190" r="155" stroke-width="2" stroke-dasharray="60 14 6 14" stroke-opacity="0.55"/>
+    <circle class="spinr" cx="210" cy="190" r="140" stroke-width="6" stroke-dasharray="2 10" stroke-opacity="0.35"/>
+    <circle class="spin"  cx="210" cy="190" r="176" stroke-width="1.5" stroke-dasharray="120 300" stroke-opacity="0.8"/>
+  </g>
+
+  <!-- Helmet -->
+  <g transform="translate(210 192) scale(0.98)">
+    <!-- shell -->
+    <path fill="url(#red)" stroke="#2a0204" stroke-width="3"
+      d="M0 -128 C64 -128 104 -96 104 -40 L104 28 C104 72 88 102 62 122 L32 134 L-32 134 L-62 122 C-88 102 -104 72 -104 28 L-104 -40 C-104 -96 -64 -128 0 -128 Z"/>
+    <!-- shell highlight -->
+    <path fill="#ff6a5c" opacity="0.25" filter="url(#soft)"
+      d="M-70 -95 C-40 -120 40 -120 70 -95 C40 -108 -40 -108 -70 -95 Z"/>
+    <!-- faceplate -->
+    <path fill="url(#gold)" stroke="#5a3a07" stroke-width="2.5"
+      d="M0 -108 C46 -108 74 -86 77 -46 L74 10 L57 46 L46 96 L26 114 L-26 114 L-46 96 L-57 46 L-74 10 L-77 -46 C-74 -86 -46 -108 0 -108 Z"/>
+    <!-- forehead plate seam -->
+    <path fill="none" stroke="#7a5310" stroke-width="2"
+      d="M-62 -40 C-40 -58 40 -58 62 -40"/>
+    <path fill="none" stroke="#7a5310" stroke-width="2" d="M0 -108 L0 -54"/>
+    <!-- cheek / jaw seams -->
+    <path fill="none" stroke="#6b4709" stroke-width="2.5" stroke-linecap="round"
+      d="M-57 46 L-30 64 M57 46 L30 64 M-46 96 L-24 82 M46 96 L24 82"/>
+    <!-- mouth slit -->
+    <path fill="none" stroke="#3a2504" stroke-width="3.5" stroke-linecap="round" d="M-26 82 L26 82"/>
+    <!-- faceplate shine -->
+    <path fill="#fff6cf" opacity="0.35" filter="url(#soft)"
+      d="M-50 -82 C-30 -98 30 -98 50 -82 C25 -90 -25 -90 -50 -82 Z"/>
+    <!-- eyes -->
+    <g class="eyes" filter="url(#glow)">
+      <path fill="#dffbff" d="M-64 -22 L-16 -9 L-21 3 L-58 -6 Z"/>
+      <path fill="#dffbff" d="M64 -22 L16 -9 L21 3 L58 -6 Z"/>
+    </g>
+  </g>
+
+  <!-- scan line -->
+  <g class="scan">
+    <rect x="95" y="188" width="230" height="2" fill="#16c2ff" filter="url(#glow)"/>
+  </g>
+
+  <!-- Right side: text -->
+  <g fill="#16c2ff">
+    <text class="fade1" x="420" y="92" font-size="14" letter-spacing="4" fill-opacity="0.75">// J.A.R.V.I.S. — IDENTITY CONFIRMED</text>
+    <text class="fade2" x="420" y="150" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="2">ESHAAN</text>
+    <text class="fade2" x="420" y="198" font-size="44" font-weight="700" fill="#e8b341" letter-spacing="2">KAPOOSWALLA</text>
+    <text class="fade3" x="420" y="240" font-size="15" fill="#cfe9ff">icpc · ml @ wealthsimple · incoming @ cohere</text>
+    <text class="fade3" x="420" y="264" font-size="15" fill="#8aa4c0">prev. shopify · aws (sbg) · vector institute</text>
+    <g class="fade4">
+      <text x="420" y="318" font-size="13" fill="#16c2ff">&gt; status: <tspan fill="#7CFFB2">ONLINE</tspan>   &gt; motto: work hard &amp; be kind<tspan class="blink"> █</tspan></text>
+    </g>
+  </g>
+
+  <!-- arc reactor -->
+  <g class="pulse">
+    <circle cx="910" cy="80" r="38" fill="url(#reactor)" opacity="0.6"/>
+    <circle cx="910" cy="80" r="22" fill="none" stroke="#bff6ff" stroke-width="3" filter="url(#glow)"/>
+    <circle cx="910" cy="80" r="9" fill="#ffffff" filter="url(#glow)"/>
+  </g>
+
+  <!-- corner brackets -->
+  <g fill="none" stroke="#16c2ff" stroke-width="2" stroke-opacity="0.6">
+    <path d="M18 48 V18 H48"/><path d="M952 18 H982 V48"/>
+    <path d="M18 332 V362 H48"/><path d="M982 332 V362 H952"/>
+  </g>
+</svg>
