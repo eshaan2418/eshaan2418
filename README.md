@@ -13,4 +13,4 @@
 
 work hard & be kind
 
-reach out for opportunities at eshaank@my.yorku.ca
+
